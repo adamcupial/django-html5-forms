@@ -25,5 +25,9 @@ class Html5TextInput(forms.widgets.TextInput):
             return mark_safe(u'<input%s >' % flatatt(final_attrs))
 
 
-class Html5PasswordInput(forms.widgets.PasswordInput):
-    pass
+class Html5PasswordInput(Html5TextInput):
+    input_type = 'password'
+    def __init__(self, *args, **kwargs):
+        super(Html5PasswordInput, self).__init__(*args, **kwargs)
+        self.datalist = None
+

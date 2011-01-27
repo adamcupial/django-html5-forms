@@ -24,7 +24,6 @@ class Html5Field(forms.fields.Field):
             widget_attrs['required'] = None
         return widget_attrs
 
-
 class Html5CharField(Html5Field):
     widget = Html5TextInput
 
@@ -52,3 +51,6 @@ class Html5CharField(Html5Field):
             # The HTML attribute is maxlength, not max_length.
             par_attrs.update({'maxlength': str(self.max_length)})
         return par_attrs
+
+class Html5PasswordField(Html5CharField):
+    widget = Html5PasswordInput

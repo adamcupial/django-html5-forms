@@ -5,10 +5,10 @@ Author: Adam Cupiał
 Formfields in django are not suited for HTML5, hence this app
 
 # Installation
-#
-1. clone repository git clone git://github.com/adamcupial/django-html5-forms.git, put it somewhere in your python path
-2. add 'html5forms' to INSTALLED_APPS (not required)
-3. use appropriate form fields in your forms (since the widgets requires some additional attributes passed from forms, you should use fields)
+
+ 1. clone repository git clone git://github.com/adamcupial/django-html5-forms.git, put it somewhere in your python path
+ 2. add 'html5forms' to INSTALLED_APPS (not required)
+ 3. use appropriate form fields in your forms (since the widgets requires some additional attributes passed from forms, you should use fields)
 
 # Fields
 
@@ -24,5 +24,12 @@ Formfields in django are not suited for HTML5, hence this app
 widget: Html5TextInput
 
 ### Attributes
- * all the attr of charfield
+ * all the attr of django CharField
  * datalist: list or tuple, of words for autocompletion (sng like autocomplete in firefox or chrome)
+
+## Html5PasswordField
+
+widget: Html5PasswordInput
+
+### Attributes
+ * all the attr of django CharField/PasswordField
