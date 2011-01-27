@@ -31,3 +31,6 @@ class Html5PasswordInput(Html5TextInput):
         super(Html5PasswordInput, self).__init__(*args, **kwargs)
         self.datalist = None
 
+class Html5SearchInput(Html5TextInput):
+    input_type = 'search'
+

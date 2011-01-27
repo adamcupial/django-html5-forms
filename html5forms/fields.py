@@ -1,5 +1,5 @@
 from django import forms
-from widgets import Html5TextInput, Html5PasswordInput
+from widgets import Html5TextInput, Html5PasswordInput, Html5SearchInput
 from django.core import validators
 from django.utils.encoding import smart_unicode
 
@@ -54,3 +54,7 @@ class Html5CharField(Html5Field):
 
 class Html5PasswordField(Html5CharField):
     widget = Html5PasswordInput
+
+
+class Html5SearchField(Html5CharField):
+    widget = Html5SearchInput
