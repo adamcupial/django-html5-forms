@@ -27,6 +27,7 @@ class Html5TextInput(forms.widgets.TextInput):
 
 class Html5PasswordInput(Html5TextInput):
     input_type = 'password'
+
     def __init__(self, *args, **kwargs):
         super(Html5PasswordInput, self).__init__(*args, **kwargs)
         self.datalist = None
@@ -34,3 +35,9 @@ class Html5PasswordInput(Html5TextInput):
 class Html5SearchInput(Html5TextInput):
     input_type = 'search'
 
+class Html5EmailInput(Html5TextInput):
+    input_type = 'email'
+
+    def __init__(self, *args, **kwargs):
+        super(Html5EmailInput, self).__init__(*args, **kwargs)
+        self.datalist = None

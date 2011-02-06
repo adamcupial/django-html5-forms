@@ -1,8 +1,8 @@
 from django import forms
-from widgets import Html5TextInput, Html5PasswordInput, Html5SearchInput
+from widgets import Html5TextInput, Html5PasswordInput, Html5SearchInput, Html5EmailInput
 from django.core import validators
 from django.utils.encoding import smart_unicode
-
+from django.utils.translation import ugettext_lazy as _
 
 class Html5Field(forms.fields.Field):
 
@@ -58,3 +58,12 @@ class Html5PasswordField(Html5CharField):
 
 class Html5SearchField(Html5CharField):
     widget = Html5SearchInput
+
+
+class Html5EmailField(Html5CharField):
+    widget = Html5EmailInput
+    default_error_messages = { 
+        'invalid': _(u'Enter a valid e-mail address.'),
+    }   
+    default_validators = [validators.validate_email]
+
