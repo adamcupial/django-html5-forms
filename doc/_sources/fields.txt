@@ -1,0 +1,10 @@
+Html5 Fields
+==============================================
+
+.. autoclass:: html5forms.fields.Html5Field
+   :members: __init__
+   :show-inheritance:
+
+.. autoclass:: html5forms.fields.Html5CharField
+   :members: __init__
+   :show-inheritance:

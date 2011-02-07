@@ -1,0 +1,7 @@
+# Sphinx inventory version 1
+# Project: django-html5-forms
+# Version: 0.1
+html5forms.fields.Html5CharField class fields.html
+html5forms.fields.Html5Field class fields.html
+html5forms.fields.Html5Field.__init__ method fields.html
+html5forms.fields.Html5CharField.__init__ method fields.html
