@@ -1,3 +1,7 @@
 *~
 *.pyc
 *.swp
+*.rst
+/Makefile
+/_build
+/conf.py
