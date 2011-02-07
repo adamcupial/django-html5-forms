@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,16 +12,18 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.1',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-html5-forms v0.1 documentation" href="index.html" />
+    <link rel="next" title="Html5 Widgets" href="widgets.html" />
     <link rel="prev" title="Welcome to django-html5-forms’s documentation!" href="index.html" /> 
   </head>
   <body>
@@ -29,6 +33,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="widgets.html" title="Html5 Widgets"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to django-html5-forms’s documentation!"
              accesskey="P">previous</a> |</li>
@@ -41,62 +51,143 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="html5-fields">
-<h1>Html5 Fields<a class="headerlink" href="#html5-fields" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-html5forms.fields">
+<span id="html5-fields"></span><h1>Html5 Fields<a class="headerlink" href="#module-html5forms.fields" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="html5forms.fields.Html5Field">
 <em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5Field</tt><big>(</big><em>placeholder=None</em>, <em>autofocus=False</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5Field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">django.forms.fields.Field</span></tt></p>
-<p>Base class for Html5 Fields</p>
+<dd><p>Base class for Html5 Fields</p>
 <p>Used only for extending</p>
-<dl class="method">
-<dt id="html5forms.fields.Html5Field.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>placeholder=None</em>, <em>autofocus=False</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5Field.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><em>placeholder</em> (unicode string) &#8211; placeholder text to display if field in unfocused</li>
-<li><em>autofocus</em> (bool) &#8211; should the field be focused on load</li>
+<li><strong>placeholder</strong> (<em>String</em>) &#8211; placeholder text to display if field in unfocused</li>
+<li><strong>autofocus</strong> (<em>Boolean</em>) &#8211; should the field be focused on load</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="html5forms.fields.Html5CharField">
 <em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5CharField</tt><big>(</big><em>max_length=None</em>, <em>min_length=None</em>, <em>datalist=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5CharField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a title="html5forms.fields.Html5Field" class="reference internal" href="#html5forms.fields.Html5Field"><tt class="xref docutils literal"><span class="pre">html5forms.fields.Html5Field</span></tt></a></p>
-<p>Your basic inputfield</p>
+<dd><p>Your basic inputfield</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>datalist</em> (list of tuples) &#8211; a choices list for HTML5 autocomplete feature</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="html5forms.fields.Html5CharField.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>max_length=None</em>, <em>min_length=None</em>, <em>datalist=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5CharField.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
 <tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><em>datalist</em> (list of tuples) &#8211; choices for inbuild HTML5 autocompleter</li>
-<li><em>min_length</em> (integer) &#8211; minimum length for field</li>
-<li><em>max_length</em> (integer) &#8211; maximum length for field</li>
+<li><strong>placeholder</strong> (<em>String</em>) &#8211; placeholder text to display if field in unfocused</li>
+<li><strong>autofocus</strong> (<em>Boolean</em>) &#8211; should the field be focused on load</li>
+<li><strong>datalist</strong> (<em>list of two-tuples</em>) &#8211; choices for inbuild HTML5 autocompleter</li>
+<li><strong>min_length</strong> (<em>Integer</em>) &#8211; minimum length for field</li>
+<li><strong>max_length</strong> (<em>Integer</em>) &#8211; maximum length for field</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="class">
+<dt id="html5forms.fields.Html5PasswordField">
+<em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5PasswordField</tt><big>(</big><em>max_length=None</em>, <em>min_length=None</em>, <em>datalist=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5PasswordField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Password field</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>placeholder</strong> (<em>String</em>) &#8211; placeholder text to display if field in unfocused</li>
+<li><strong>autofocus</strong> (<em>Boolean</em>) &#8211; should the field be focused on load</li>
+<li><strong>min_length</strong> (<em>Integer</em>) &#8211; minimum length for field</li>
+<li><strong>max_length</strong> (<em>Integer</em>) &#8211; maximum length for field</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="html5forms.fields.Html5SearchField">
+<em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5SearchField</tt><big>(</big><em>max_length=None</em>, <em>min_length=None</em>, <em>datalist=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5SearchField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search field</p>
+<p>apart from default widget works just like CharField</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="html5forms.fields.Html5EmailField">
+<em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5EmailField</tt><big>(</big><em>max_length=None</em>, <em>min_length=None</em>, <em>datalist=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5EmailField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email Field</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>placeholder</strong> (<em>String</em>) &#8211; placeholder text to display if field in unfocused</li>
+<li><strong>autofocus</strong> (<em>Boolean</em>) &#8211; should the field be focused on load</li>
+<li><strong>datalist</strong> (<em>list of two-tuples</em>) &#8211; choices for inbuild HTML5 autocompleter</li>
+<li><strong>min_length</strong> (<em>Integer</em>) &#8211; minimum length for field</li>
+<li><strong>max_length</strong> (<em>Integer</em>) &#8211; maximum length for field</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="html5forms.fields.Html5URLField">
+<em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5URLField</tt><big>(</big><em>max_length=None</em>, <em>min_length=None</em>, <em>verify_exists=False</em>, <em>validator_user_agent='Django/1.2.3 (http://www.djangoproject.com)'</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5URLField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Url Field</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>placeholder</strong> (<em>String</em>) &#8211; placeholder text to display if field in unfocused</li>
+<li><strong>autofocus</strong> (<em>Boolean</em>) &#8211; should the field be focused on load</li>
+<li><strong>datalist</strong> (<em>list of two-tuples</em>) &#8211; choices for inbuild HTML5 autocompleter</li>
+<li><strong>min_length</strong> (<em>Integer</em>) &#8211; minimum length for field</li>
+<li><strong>max_length</strong> (<em>Integer</em>) &#8211; maximum length for field</li>
+<li><strong>verify_exists</strong> (<em>Boolean</em>) &#8211; check whether specified url address exists (is not 404), default False</li>
+<li><strong>validator_user_agent</strong> (<em>String</em>) &#8211; String used as the user-agent used when checking for a URL&#8217;s existence. Defaults to the value of the URL_VALIDATOR_USER_AGENT setting.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="html5forms.fields.Html5IntegerField">
+<em class="property">class </em><tt class="descclassname">html5forms.fields.</tt><tt class="descname">Html5IntegerField</tt><big>(</big><em>max_value=None</em>, <em>min_value=None</em>, <em>step=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5IntegerField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer Field</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>placeholder</strong> (<em>String</em>) &#8211; placeholder text to display if field in unfocused</li>
+<li><strong>autofocus</strong> (<em>Boolean</em>) &#8211; should the field be focused on load</li>
+<li><strong>min_value</strong> (<em>Integer</em>) &#8211; minimum value for field</li>
+<li><strong>max_value</strong> (<em>Integer</em>) &#8211; maximum value for field</li>
+<li><strong>step</strong> (<em>Integer</em>) &#8211; step for number selector (eg. 2 for 2,4,6,8...)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="html5forms.fields.Html5IntegerField.to_python">
+<tt class="descname">to_python</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#html5forms.fields.Html5IntegerField.to_python" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates that int() can be called on the input. Returns the result
+of int(). Returns None for empty values.</p>
 </dd></dl>
 
 </dd></dl>
@@ -109,27 +200,30 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="index.html"
-                                  title="previous chapter">Welcome to django-html5-forms&#8217;s documentation!</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/fields.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to django-html5-forms&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="widgets.html"
+                        title="next chapter">Html5 Widgets</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/fields.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -141,14 +235,20 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="widgets.html" title="Html5 Widgets"
+             >next</a> |</li>
+        <li class="right" >
           <a href="index.html" title="Welcome to django-html5-forms’s documentation!"
              >previous</a> |</li>
         <li><a href="index.html">django-html5-forms v0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2011, Adam Cupiał.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+        &copy; Copyright 2011, Adam Cupiał.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>

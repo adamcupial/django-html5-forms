@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    fields
+   widgets
 
 Indices and tables
 ==================

@@ -1,5 +1,5 @@
-Html5 Fields
+Html5 Widgets
 ==============================================
 
-.. automodule:: html5forms.fields
+.. automodule:: html5forms.widgets
    :members:
