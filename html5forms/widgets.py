@@ -14,8 +14,7 @@ class Html5TextInput(forms.widgets.TextInput):
         if value != '':
             # Only add the 'value' attribute if a value is non-empty.
             final_attrs['value'] = force_unicode(self._format_value(value))
-        if self.datalist is not None\
-                and isinstance(self.datalist, (tuple, list)):
+        if self.datalist is not None and isinstance(self.datalist, (tuple, list)):
             datalist_name = u'%s_datalist' % name
             final_attrs['list'] = force_unicode(u'%s_datalist' % name)
             return mark_safe(u"""<input%s >%s"""
@@ -41,3 +40,9 @@ class Html5EmailInput(Html5TextInput):
     def __init__(self, *args, **kwargs):
         super(Html5EmailInput, self).__init__(*args, **kwargs)
         self.datalist = None
+
+class Html5URLInput(Html5TextInput):
+    input_type = 'url'
+
+class Html5NumberInput(Html5TextInput):
+    input_type = 'number'
