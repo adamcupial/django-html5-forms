@@ -2,6 +2,28 @@ from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_unicode
 from util import flatatt, render_datalist
+from django.utils.html import conditional_escape
+
+class Html5Textarea(forms.widgets.Textarea):
+
+    def __init__(self, attrs=None):
+        # The 'rows' and 'cols' attributes are required for HTML correctness.
+        default_attrs = {'cols': '40', 'rows': '10'}
+        if attrs:
+            default_attrs.update(attrs)
+        super(Html5Textarea, self).__init__(default_attrs)
+
+
+    def render(self, name, value, attrs=None):
+        if value is None:
+            value = ''
+        final_attrs = self.build_attrs(attrs, name=name)
+
+        if value != '':
+            # Only add the 'value' attribute if a value is non-empty.
+            value = force_unicode(self._format_value(value))
+        return mark_safe(u'<textarea%s>%s</textarea>' % (flatatt(final_attrs),
+                conditional_escape(force_unicode(value))))
 
 
 class Html5TextInput(forms.widgets.TextInput):
