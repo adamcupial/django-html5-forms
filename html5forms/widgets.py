@@ -19,9 +19,6 @@ class Html5Textarea(forms.widgets.Textarea):
             value = ''
         final_attrs = self.build_attrs(attrs, name=name)
 
-        if value != '':
-            # Only add the 'value' attribute if a value is non-empty.
-            value = force_unicode(self._format_value(value))
         return mark_safe(u'<textarea%s>%s</textarea>' % (flatatt(final_attrs),
                 conditional_escape(force_unicode(value))))
 
@@ -46,12 +43,30 @@ class Html5TextInput(forms.widgets.TextInput):
             return mark_safe(u'<input%s >' % flatatt(final_attrs))
 
 
+
 class Html5PasswordInput(Html5TextInput):
     input_type = 'password'
 
     def __init__(self, *args, **kwargs):
         super(Html5PasswordInput, self).__init__(*args, **kwargs)
         self.datalist = None
+
+class Html5CheckboxInput(forms.widgets.CheckboxInput):
+    input_type = 'checkbox'
+
+    def render(self, name, value, attrs=None):
+        final_attrs = self.build_attrs(attrs, type='checkbox', name=name)
+        try:
+            result = self.check_test(value)
+        except: # Silently catch exceptions
+            result = False
+        if result:
+            final_attrs['checked'] = 'checked'
+        if value not in ('', True, False, None):
+            # Only add the 'value' attribute if a value is non-empty.
+            final_attrs['value'] = force_unicode(value)
+        return mark_safe(u'<input%s />' % flatatt(final_attrs))
+
 
 class Html5SearchInput(Html5TextInput):
     input_type = 'search'

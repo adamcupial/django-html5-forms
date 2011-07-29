@@ -1,6 +1,7 @@
 from django import forms
 from django.utils import formats
-from widgets import Html5TextInput, Html5PasswordInput
+from django.core.exceptions import ValidationError
+from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
 from widgets import Html5SearchInput, Html5EmailInput
 from widgets import Html5URLInput, Html5NumberInput
 from django.core import validators, exceptions
@@ -37,6 +38,37 @@ class Html5Field(forms.fields.Field):
 
         if self.placeholder:
             widget_attrs['placeholder'] = self.placeholder
+
+        if self.autofocus:
+            widget_attrs['autofocus'] = None
+
+        if self.required:
+            widget_attrs['required'] = None
+
+        return widget_attrs
+
+class Html5BooleanField(Html5Field):
+    widget = Html5CheckboxInput
+
+
+    def to_python(self, value):
+        """Returns a Python boolean object."""
+        # Explicitly check for the string 'False', which is what a hidden field
+        # will submit for False. Also check for '0', since this is what
+        # RadioSelect will provide. Because bool("True") == bool('1') == True,
+        # we don't need to handle that explicitly.
+        if value in ('False', '0'):
+            value = False
+        else:
+            value = bool(value)
+        value = super(Html5BooleanField, self).to_python(value)
+        if not value and self.required:
+            raise ValidationError(self.error_messages['required'])
+        return value
+
+
+    def widget_attrs(self, widget):
+        widget_attrs = {}
 
         if self.autofocus:
             widget_attrs['autofocus'] = None
