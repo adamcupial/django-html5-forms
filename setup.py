@@ -21,7 +21,7 @@ setup(name='html5forms',
       long_description=LONG_DESCRIPTION,
       platforms=['any'],
       classifiers=[
-          'Development Status :: 1 - Alpha',
+          'Development Status :: 4 - Beta',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: MIT License',
           'Operating System :: OS Independent',
