@@ -35,8 +35,8 @@ class Html5Field(forms.fields.Field):
         super(Html5Field, self).__init__(*args, **kwargs)
 
     def widget_attrs(self, widget):
-        widget_attrs = super(CharField, self).widget_attrs(widget)
-        current_class = widget_attrs.get('class', '')
+        widget_attrs = super(Html5Field, self).widget_attrs(widget)
+        current_class = widget_attrs.get('class', '').split()
 
         if self.placeholder:
             widget_attrs['placeholder'] = self.placeholder

@@ -30,3 +30,27 @@ class TestBooleanField(TestCase):
         form = self.form_class({'field':'t'})
         self.assertEqual(unicode(form['field']), 
             '<input checked="checked" type="checkbox" name="field" value="t" id="id_field" />')
+
+
+class TestCharField(TestCase):
+    def setUp(self):
+        class TestForm(Form):
+            field = Html5CharField(max_length=20, required=True, class_attr=['test-class'], \
+                placeholder='testph', autofocus=True)
+        self.form_class = TestForm
+
+
+    def test_length(self):
+        form = self.form_class({'field':'*'*20})
+        self.assertTrue(form.is_valid())
+    
+    def test_length2(self):
+        form = self.form_class({'field':'*'*21})
+        self.assertFalse(form.is_valid())
+
+    def test_html_output(self):
+        form = self.form_class({'field':'**'})
+        self.assertIn('maxlength="20"', unicode(form['field']))
+        self.assertIn('autofocus', unicode(form['field']))
+        self.assertIn(' required ', unicode(form['field']))
+        self.assertIn('class="required test-class"', unicode(form['field']))
