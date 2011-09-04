@@ -13,7 +13,7 @@ import urlparse
 __all__ = (
         'Html5Field', 'Html5CharField', 'Html5PasswordField',
         'Html5SearchField', 'Html5EmailField', 'Html5URLField',
-        'Html5IntegerField'
+        'Html5IntegerField', 'Html5BooleanField'
         )
 
 
