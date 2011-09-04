@@ -3,7 +3,7 @@ from django.utils import formats
 from django.core.exceptions import ValidationError
 from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
 from widgets import Html5SearchInput, Html5EmailInput
-from widgets import Html5URLInput, Html5NumberInput
+from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
 from django.core import validators, exceptions
 from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext_lazy as _
@@ -13,7 +13,7 @@ import urlparse
 __all__ = (
         'Html5Field', 'Html5CharField', 'Html5PasswordField',
         'Html5SearchField', 'Html5EmailField', 'Html5URLField',
-        'Html5IntegerField', 'Html5BooleanField'
+        'Html5IntegerField', 'Html5BooleanField', 'Html5RangeField'
         )
 
 
@@ -284,3 +284,21 @@ class Html5IntegerField(Html5Field):
         except (ValueError, TypeError):
             raise exceptions.ValidationError(self.error_messages['invalid'])
         return value
+
+
+class Html5RangeField(Html5IntegerField):
+    """ Number Range Field (just like number field, but shows a slider instead of spinbox)
+
+    :param placeholder: placeholder text to display if field in unfocused
+    :type placeholder: String
+    :param autofocus: should the field be focused on load
+    :type autofocus: Boolean
+    :param min_value: minimum value for field
+    :type min_value: Integer
+    :param max_value: maximum value for field
+    :type max_value: Integer
+    :param step: step for number selector (eg. 2 for 2,4,6,8...)
+    :type step: Integer
+    """
+
+    widget = Html5RangeInput

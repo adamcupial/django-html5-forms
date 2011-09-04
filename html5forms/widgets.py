@@ -83,3 +83,6 @@ class Html5URLInput(Html5TextInput):
 
 class Html5NumberInput(Html5TextInput):
     input_type = 'number'
+
+class Html5RangeInput(Html5NumberInput):
+    input_type = 'range'
