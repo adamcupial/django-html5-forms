@@ -54,3 +54,31 @@ class TestCharField(TestCase):
         self.assertIn('autofocus', unicode(form['field']))
         self.assertIn(' required ', unicode(form['field']))
         self.assertIn('class="required test-class"', unicode(form['field']))
+
+
+class TestIntegerField(TestCase):
+    def setUp(self):
+        class TestForm(Form):
+            field = Html5IntegerField(max_value=100, min_value=10)
+
+        self.form_class = TestForm
+
+    def test_min_value(self):
+        form = self.form_class({'field': '4'})
+        self.assertFalse(form.is_valid())
+
+    def test_min_value2(self):
+        form = self.form_class({'field': '11'})
+        self.assertTrue(form.is_valid())
+
+    def test_max_value(self):
+        form = self.form_class({'field': '101'})
+        self.assertFalse(form.is_valid())
+
+    def test_max_value2(self):
+        form = self.form_class({'field': '99'})
+        self.assertTrue(form.is_valid())
+
+    def test_invalid(self):
+        form = self.form_class({'field': '2s'})
+        self.assertFalse(form.is_valid())
