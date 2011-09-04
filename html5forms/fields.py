@@ -28,13 +28,15 @@ class Html5Field(forms.fields.Field):
     :type autofocus: Boolean
     """
 
-    def __init__(self, placeholder=None, autofocus=False, *args, **kwargs):
+    def __init__(self, placeholder=None, autofocus=False, class_attr=[], *args, **kwargs):
         self.placeholder = placeholder
         self.autofocus = autofocus
+        self.class_attr = class_attr
         super(Html5Field, self).__init__(*args, **kwargs)
 
     def widget_attrs(self, widget):
-        widget_attrs = {}
+        widget_attrs = super(CharField, self).widget_attrs(widget)
+        current_class = widget_attrs.get('class', '')
 
         if self.placeholder:
             widget_attrs['placeholder'] = self.placeholder
@@ -44,12 +46,22 @@ class Html5Field(forms.fields.Field):
 
         if self.required:
             widget_attrs['required'] = None
+            current_class.append('required')
+
+        if isinstance(self.class_attr, (str, unicode)):
+            self.class_attr = self.class_attr.split()
+
+        for classitem in self.class_attr:
+            if classitem not in current_class:
+                current_class.append(classitem)
+
+        if current_class:
+            widget_attrs['class'] = ' '.join(current_class)
 
         return widget_attrs
 
 class Html5BooleanField(Html5Field):
     widget = Html5CheckboxInput
-
 
     def to_python(self, value):
         """Returns a Python boolean object."""
