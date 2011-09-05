@@ -3,7 +3,7 @@ from django.utils import formats
 from django.core.exceptions import ValidationError
 from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
 from widgets import Html5SearchInput, Html5EmailInput
-from widgets import Html5URLInput, Html5NumberInput
+from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
 from django.core import validators, exceptions
 from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext_lazy as _
@@ -13,7 +13,7 @@ import urlparse
 __all__ = (
         'Html5Field', 'Html5CharField', 'Html5PasswordField',
         'Html5SearchField', 'Html5EmailField', 'Html5URLField',
-        'Html5IntegerField'
+        'Html5IntegerField', 'Html5BooleanField', 'Html5RangeField'
         )
 
 
@@ -28,13 +28,15 @@ class Html5Field(forms.fields.Field):
     :type autofocus: Boolean
     """
 
-    def __init__(self, placeholder=None, autofocus=False, *args, **kwargs):
+    def __init__(self, placeholder=None, autofocus=False, class_attr=[], *args, **kwargs):
         self.placeholder = placeholder
         self.autofocus = autofocus
+        self.class_attr = class_attr
         super(Html5Field, self).__init__(*args, **kwargs)
 
     def widget_attrs(self, widget):
-        widget_attrs = {}
+        widget_attrs = super(Html5Field, self).widget_attrs(widget)
+        current_class = widget_attrs.get('class', '').split()
 
         if self.placeholder:
             widget_attrs['placeholder'] = self.placeholder
@@ -44,12 +46,22 @@ class Html5Field(forms.fields.Field):
 
         if self.required:
             widget_attrs['required'] = None
+            current_class.append('required')
+
+        if isinstance(self.class_attr, (str, unicode)):
+            self.class_attr = self.class_attr.split()
+
+        for classitem in self.class_attr:
+            if classitem not in current_class:
+                current_class.append(classitem)
+
+        if current_class:
+            widget_attrs['class'] = ' '.join(current_class)
 
         return widget_attrs
 
 class Html5BooleanField(Html5Field):
     widget = Html5CheckboxInput
-
 
     def to_python(self, value):
         """Returns a Python boolean object."""
@@ -272,3 +284,21 @@ class Html5IntegerField(Html5Field):
         except (ValueError, TypeError):
             raise exceptions.ValidationError(self.error_messages['invalid'])
         return value
+
+
+class Html5RangeField(Html5IntegerField):
+    """ Number Range Field (just like number field, but shows a slider instead of spinbox)
+
+    :param placeholder: placeholder text to display if field in unfocused
+    :type placeholder: String
+    :param autofocus: should the field be focused on load
+    :type autofocus: Boolean
+    :param min_value: minimum value for field
+    :type min_value: Integer
+    :param max_value: maximum value for field
+    :type max_value: Integer
+    :param step: step for number selector (eg. 2 for 2,4,6,8...)
+    :type step: Integer
+    """
+
+    widget = Html5RangeInput
