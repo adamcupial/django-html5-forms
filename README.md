@@ -1,5 +1,7 @@
 Author: Adam Cupiał
 
+Contributors: Andrei Antoukh, Ben Lopatin
+
 # Description
 
 Formfields in django are not suited for HTML5, hence this app
