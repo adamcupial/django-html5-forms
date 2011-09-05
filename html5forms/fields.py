@@ -13,7 +13,7 @@ import urlparse
 __all__ = (
         'Html5Field', 'Html5CharField', 'Html5PasswordField',
         'Html5SearchField', 'Html5EmailField', 'Html5URLField',
-        'Html5IntegerField', 'Html5BooleanField', 'Html5RangeField'
+        'Html5IntegerField', 'Html5BooleanField', 'Html5RangeField',
         )
 
 
@@ -28,7 +28,8 @@ class Html5Field(forms.fields.Field):
     :type autofocus: Boolean
     """
 
-    def __init__(self, placeholder=None, autofocus=False, class_attr=[], *args, **kwargs):
+    def __init__(self, placeholder=None, autofocus=False, class_attr=[],
+            *args, **kwargs):
         self.placeholder = placeholder
         self.autofocus = autofocus
         self.class_attr = class_attr
@@ -60,6 +61,7 @@ class Html5Field(forms.fields.Field):
 
         return widget_attrs
 
+
 class Html5BooleanField(Html5Field):
     widget = Html5CheckboxInput
 
@@ -77,7 +79,6 @@ class Html5BooleanField(Html5Field):
         if not value and self.required:
             raise ValidationError(self.error_messages['required'])
         return value
-
 
     def widget_attrs(self, widget):
         widget_attrs = {}
@@ -246,11 +247,10 @@ class Html5IntegerField(Html5Field):
         'min_value': _(u'Ensure this value is greater than or equal to %(limit_value)s.'),
     }
 
-    def __init__(self, max_value=None, min_value=None, step=None, *args, **kwargs):
+    def __init__(self, max_value=None, min_value=None, *args, **kwargs):
 
         self.max_value = max_value
         self.min_value = min_value
-        self.step = step
 
         super(Html5IntegerField, self).__init__(*args, **kwargs)
 
@@ -265,8 +265,6 @@ class Html5IntegerField(Html5Field):
             par_attrs.update({'max': str(self.max_value)})
         if self.min_value is not None:
             par_attrs.update({'min': str(self.min_value)})
-        if self.step is not None:
-            par_attrs.update({'step': str(self.step)})
         return par_attrs
 
     def to_python(self, value):
@@ -302,3 +300,14 @@ class Html5RangeField(Html5IntegerField):
     """
 
     widget = Html5RangeInput
+
+    def __init__(self, step=None, *args, **kwargs):
+
+        super(Html5RangeField, self).__init__(*args, **kwargs)
+        self.step = step
+
+    def widget_attrs(self, widget):
+        par_attrs = super(Html5RangeField, self).widget_attrs(widget)
+        if self.step is not None:
+            par_attrs.update({'step': str(self.step)})
+        return par_attrs

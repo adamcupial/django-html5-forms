@@ -25,10 +25,8 @@ Formfields in django are not suited for HTML5, hence this app
 
 widget: Html5TextInput
 
-### Description
  Typical CharField, most common field in the internet, allows datalist choices, which is great autocomplete feature
 
-### Attributes
  * all the attr of django CharField
  * datalist: list or tuple, of words for autocompletion (sng like autocomplete in firefox or chrome)
 
@@ -36,18 +34,41 @@ widget: Html5TextInput
 
 widget: Html5PasswordInput
 
-### Description
  Typical PasswordField, does not allow datalist choices
 
-### Attributes
  * all the attr of django CharField/PasswordField
 
 ## Html5SearchField
 
 widget: Html5SearchInput
 
-### Description
-  New field in HTML5 - the same as CharField only different input type, should be used in search fields, allows datalists
+ New field in HTML5 - the same as CharField only different input type, should be used in search fields, allows datalists
 
-### Attributes
  * all the attr of django CharField/PasswordField
+
+## Html5EmailField
+ 
+ widget: Html5
+
+## Html5UrlField
+
+## Html5IntegerField
+
+widget: Html5NumberInput
+
+  Attributes:
+   * required = [True/False]
+   * min_value
+   * max_value
+
+## Html5BooleanField
+
+widget: Html5CheckboxInput
+
+## Html5RangeField
+
+widget: Html5RangeInput
+
+  Attributes:
+   * same as Html5IntegerField
+   * step
