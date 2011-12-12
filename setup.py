@@ -14,7 +14,7 @@ except:
 setup(name='html5forms',
       version='0.0.1',
       packages=find_packages(),
-      author=u'Adam Cupiał',
+      author=u'Adam Cupia',
       url='https://github.com/adamcupial/django-html5-forms',
       include_package_data=True,
       description=DESCRIPTION,
