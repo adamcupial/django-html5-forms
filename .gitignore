@@ -5,3 +5,6 @@
 /Makefile
 /_build
 /conf.py
+/build
+/*.egg-info
+/dist

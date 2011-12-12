@@ -1,5 +1,5 @@
 #!/usr/local/bin/python
-# coding: utf-8
+# -*- encoding: utf-8 -*-
 
 from setuptools import setup, find_packages
 
@@ -12,7 +12,7 @@ except:
 
 
 setup(name='html5forms',
-      version='0.0.1',
+      version='0.0.2',
       packages=find_packages(),
       author=u'Adam Cupiał',
       url='https://github.com/adamcupial/django-html5-forms',
