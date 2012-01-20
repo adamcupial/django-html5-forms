@@ -348,7 +348,7 @@ class Html5ChoiceField(Html5Field):
         """
         Validates that the input is in self.choices.
         """
-        super(ChoiceField, self).validate(value)
+        super(Html5ChoiceField, self).validate(value)
         if value and not self.valid_value(value):
             raise ValidationError(self.error_messages['invalid_choice'] % {'value': value})
 
