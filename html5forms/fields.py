@@ -35,7 +35,6 @@ class Html5Field(forms.fields.Field):
         self.class_attr = class_attr
         self.choices = choices
         super(Html5Field, self).__init__(*args, **kwargs)
-        
 
     def widget_attrs(self, widget):
         widget_attrs = super(Html5Field, self).widget_attrs(widget)
@@ -107,20 +106,24 @@ class Html5CharField(Html5Field):
     :type min_length: Integer
     :param max_length: maximum length for field
     :type max_length: Integer
+    :param pattern: regular expression to check the value against
+    :type max_length: String
     """
 
     widget = Html5TextInput
 
     def __init__(self, max_length=None, min_length=None,
-            datalist=None, *args, **kwargs):
-        self.max_length, self.min_length, self.datalist = max_length,\
-                min_length, datalist
+            datalist=None, pattern=None, *args, **kwargs):
+        self.max_length, self.min_length, self.datalist, \
+                self.pattern = max_length, min_length, datalist, pattern
         self.widget.datalist = datalist
         super(Html5CharField, self).__init__(*args, **kwargs)
         if min_length is not None:
             self.validators.append(validators.MinLengthValidator(min_length))
         if max_length is not None:
             self.validators.append(validators.MaxLengthValidator(max_length))
+        if pattern is not None:
+            self.validators.append(validators.RegexValidator(pattern))
 
     def to_python(self, value):
         if value in validators.EMPTY_VALUES:
@@ -133,6 +136,8 @@ class Html5CharField(Html5Field):
                 and isinstance(widget, (Html5TextInput, Html5PasswordInput)):
             # The HTML attribute is maxlength, not max_length.
             par_attrs.update({'maxlength': str(self.max_length)})
+        if self.pattern is not None:
+            par_attrs.update({'pattern': self.pattern})
         return par_attrs
 
 
