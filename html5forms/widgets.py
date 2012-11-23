@@ -7,11 +7,9 @@ from django.utils.html import conditional_escape
 class Html5Textarea(forms.widgets.Textarea):
 
     def __init__(self, attrs=None):
-        # The 'rows' and 'cols' attributes are required for HTML correctness.
-        default_attrs = {'cols': '40', 'rows': '10'}
-        if attrs:
-            default_attrs.update(attrs)
-        super(Html5Textarea, self).__init__(default_attrs)
+        if attrs is None:
+            attrs = {}
+        super(Html5Textarea, self).__init__(attrs)
 
 
     def render(self, name, value, attrs=None):
