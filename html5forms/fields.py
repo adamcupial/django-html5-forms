@@ -2,7 +2,7 @@ from django import forms
 from django.utils import formats
 from django.core.exceptions import ValidationError
 from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
-from widgets import Html5SearchInput, Html5EmailInput
+from widgets import Html5SearchInput, Html5EmailInput, Html5TelInput
 from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
 from django.core import validators, exceptions
 from django.utils.encoding import smart_unicode
@@ -14,6 +14,7 @@ __all__ = (
         'Html5Field', 'Html5CharField', 'Html5PasswordField',
         'Html5SearchField', 'Html5EmailField', 'Html5URLField',
         'Html5IntegerField', 'Html5BooleanField', 'Html5RangeField',
+        'Html5TelField',
         )
 
 
@@ -35,7 +36,7 @@ class Html5Field(forms.fields.Field):
         self.class_attr = class_attr
         self.choices = choices
         super(Html5Field, self).__init__(*args, **kwargs)
-        
+
 
     def widget_attrs(self, widget):
         widget_attrs = super(Html5Field, self).widget_attrs(widget)
@@ -52,7 +53,7 @@ class Html5Field(forms.fields.Field):
             current_class.append('required')
 
         if isinstance(self.class_attr, (str, unicode)):
-            self.class_attr = self.class_attr.split()    
+            self.class_attr = self.class_attr.split()
 
         for classitem in self.class_attr:
             if classitem not in current_class:
@@ -224,6 +225,22 @@ class Html5URLField(Html5CharField):
                 url_fields[2] = '/'
                 value = urlparse.urlunsplit(url_fields)
         return super(Html5URLField, self).to_python(value)
+
+
+class Html5TelField(Html5Field):
+    """ Telephone Field
+
+    :param placeholder: placeholder text to display if field in unfocused
+    :type placeholder: String
+    :param autofocus: should the field be focused on load
+    :type autofocus: Boolean
+    """
+
+    widget = Html5TelInput
+
+    default_error_messages = {
+        'invalid': _(u'Enter a valid telephone number.'),
+    }
 
 
 class Html5IntegerField(Html5Field):
