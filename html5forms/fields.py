@@ -35,7 +35,6 @@ class Html5Field(forms.fields.Field):
         self.class_attr = class_attr
         self.choices = choices
         super(Html5Field, self).__init__(*args, **kwargs)
-        
 
     def widget_attrs(self, widget):
         widget_attrs = super(Html5Field, self).widget_attrs(widget)
@@ -52,7 +51,7 @@ class Html5Field(forms.fields.Field):
             current_class.append('required')
 
         if isinstance(self.class_attr, (str, unicode)):
-            self.class_attr = self.class_attr.split()    
+            self.class_attr = self.class_attr.split()
 
         for classitem in self.class_attr:
             if classitem not in current_class:
@@ -204,14 +203,11 @@ class Html5URLField(Html5CharField):
     widget = Html5URLInput
     default_error_messages = {
         'invalid': _(u'Enter a valid URL.'),
-        'invalid_link': _(u'This URL appears to be a broken link.'),
     }
 
-    def __init__(self, max_length=None, min_length=None, verify_exists=False,
-            validator_user_agent=validators.URL_VALIDATOR_USER_AGENT, *args, **kwargs):
-        super(Html5URLField, self).__init__(max_length, min_length, *args,
-                                       **kwargs)
-        self.validators.append(validators.URLValidator(verify_exists=verify_exists, validator_user_agent=validator_user_agent))
+    def __init__(self, max_length=None, min_length=None, *args, **kwargs):
+        super(Html5URLField, self).__init__(max_length, min_length, *args, **kwargs)
+        self.validators.append(validators.URLValidator())
 
     def to_python(self, value):
         if value:
