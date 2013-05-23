@@ -47,8 +47,8 @@ widget: Html5SearchInput
  * all the attr of django CharField/PasswordField
 
 ## Html5EmailField
- 
- widget: Html5
+
+ widget: Html5EmailInput
 
 ## Html5UrlField
 
@@ -72,3 +72,13 @@ widget: Html5RangeInput
   Attributes:
    * same as Html5IntegerField
    * step
+
+## Html5TelField
+
+widget: Html5TelInput
+
+ New field in HTML5 - provides defaults for minimum and maximum length that
+ should accept most phone numbers.
+
+  Attributes:
+    * same as Html5CharField
