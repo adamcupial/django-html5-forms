@@ -1,7 +1,6 @@
 from django import forms
 from django.utils import formats
 from django.core.exceptions import ValidationError
-from validators import TelephoneValidator
 from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
 from widgets import Html5SearchInput, Html5EmailInput, Html5TelInput
 from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
@@ -228,7 +227,7 @@ class Html5URLField(Html5CharField):
         return super(Html5URLField, self).to_python(value)
 
 
-class Html5TelField(Html5Field):
+class Html5TelField(Html5CharField):
     """ Telephone Field
 
     :param placeholder: placeholder text to display if field in unfocused
@@ -242,13 +241,6 @@ class Html5TelField(Html5Field):
     default_error_messages = {
         'invalid': _(u'Enter a valid telephone number.'),
     }
-
-    def __init__(self, *args, **kwargs):
-        """Setup the validator for telephone numbers.
-        """
-        super(Html5TelField, self).__init__(*args, **kwargs)
-
-        self.validators.append(TelephoneValidator())
 
 
 class Html5IntegerField(Html5Field):
