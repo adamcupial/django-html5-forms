@@ -81,4 +81,4 @@ widget: Html5TelInput
  should accept most phone numbers.
 
   Attributes:
-    * same as Html5CharField
+   * same as Html5CharField
