@@ -234,6 +234,12 @@ class Html5TelField(Html5CharField):
     :type placeholder: String
     :param autofocus: should the field be focused on load
     :type autofocus: Boolean
+    :param datalist: choices for inbuild HTML5 autocompleter
+    :type datalist: list of two-tuples
+    :param min_length: minimum length for field
+    :type min_length: Integer
+    :param max_length: maximum length for field
+    :type max_length: Integer
     """
 
     widget = Html5TelInput
@@ -241,6 +247,14 @@ class Html5TelField(Html5CharField):
     default_error_messages = {
         'invalid': _(u'Enter a valid telephone number.'),
     }
+
+    def __init__(self, max_length=30, min_length=1,
+            datalist=None, *args, **kwargs):
+        """Provides a default min and max length for developers who just want
+        to use a phone number.
+        """
+        super(Html5TelField, self).__init__(
+            max_length, min_length, datalist, *args, **kwargs)
 
 
 class Html5IntegerField(Html5Field):
