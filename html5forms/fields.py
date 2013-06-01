@@ -29,14 +29,13 @@ class Html5Field(forms.fields.Field):
     :type autofocus: Boolean
     """
 
-    def __init__(self, choices=(), placeholder=None, autofocus=False, class_attr=[],
-            *args, **kwargs):
+    def __init__(self, choices=(), placeholder=None, autofocus=False,
+            class_attr=[], *args, **kwargs):
         self.placeholder = placeholder
         self.autofocus = autofocus
         self.class_attr = class_attr
         self.choices = choices
         super(Html5Field, self).__init__(*args, **kwargs)
-
 
     def widget_attrs(self, widget):
         widget_attrs = super(Html5Field, self).widget_attrs(widget)
@@ -209,10 +208,13 @@ class Html5URLField(Html5CharField):
     }
 
     def __init__(self, max_length=None, min_length=None, verify_exists=False,
-            validator_user_agent=validators.URL_VALIDATOR_USER_AGENT, *args, **kwargs):
-        super(Html5URLField, self).__init__(max_length, min_length, *args,
-                                       **kwargs)
-        self.validators.append(validators.URLValidator(verify_exists=verify_exists, validator_user_agent=validator_user_agent))
+            validator_user_agent=validators.URL_VALIDATOR_USER_AGENT, *args,
+            **kwargs):
+        super(Html5URLField, self).__init__(
+            max_length, min_length, *args, **kwargs)
+        self.validators.append(validators.URLValidator(
+            verify_exists=verify_exists,
+            validator_user_agent=validator_user_agent))
 
     def to_python(self, value):
         if value:
