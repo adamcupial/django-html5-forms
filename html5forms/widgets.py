@@ -4,6 +4,7 @@ from django.utils.encoding import force_unicode
 from util import flatatt, render_datalist
 from django.utils.html import conditional_escape
 
+
 class Html5Textarea(forms.widgets.Textarea):
 
     def __init__(self, attrs=None):
@@ -84,3 +85,6 @@ class Html5NumberInput(Html5TextInput):
 
 class Html5RangeInput(Html5NumberInput):
     input_type = 'range'
+
+class Html5TelInput(Html5TextInput):
+    input_type = 'tel'
