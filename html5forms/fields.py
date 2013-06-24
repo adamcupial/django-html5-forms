@@ -196,7 +196,7 @@ class Html5URLField(Html5CharField):
     :type max_length: Integer
     :param verify_exists: check whether specified url address exists (is not 404), default False
     :type verify_exists: Boolean
-    :param validator_user_agent: String used as the user-agent used when checking for a URL's existence. Defaults to the value of the URL_VALIDATOR_USER_AGENT setting.
+    :param validator_user_agent: String used as the user-agent used when checking for a URL's existence.
     :type validator_user_agent: String
     """
 
