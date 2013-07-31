@@ -2,7 +2,7 @@ from django import forms
 from django.utils import formats
 from django.core.exceptions import ValidationError
 from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
-from widgets import Html5SearchInput, Html5EmailInput
+from widgets import Html5SearchInput, Html5EmailInput, Html5Select
 from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
 from django.core import validators, exceptions
 from django.utils.encoding import smart_unicode
@@ -312,7 +312,7 @@ class Html5RangeField(Html5IntegerField):
 
 
 class Html5ChoiceField(Html5Field):
-    widget = forms.Select
+    widget = Html5Select
     default_error_messages = {
         'invalid_choice': _(u'Select a valid choice. %(value)s is not one of the available choices.'),
     }
