@@ -353,7 +353,8 @@ class Html5ChoiceField(Html5Field):
         for k, v in self.choices:
             if isinstance(v, (list, tuple)):
                 # This is an optgroup, so look inside the group for options
-                for k2, v2 in v:
+                for x in v:
+                    k2 = x[0]
                     if value == smart_unicode(k2):
                         return True
             else:
