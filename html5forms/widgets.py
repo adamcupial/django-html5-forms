@@ -104,5 +104,5 @@ class Html5Select(forms.Select):
                 # Only allow for a single selection.
                 selected_choices.remove(option_value)
         selected_html = mark_safe(selected_html)
-        return format_html('<option value="{0}"{1}>{2}</option>',
-                option_value, selected_html, force_text(option_label))
+        return format_html(u'<option value="{0}"{1}>{2}</option>',
+                option_value, selected_html, force_unicode(option_label))
