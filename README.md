@@ -1,27 +1,27 @@
 Author: Adam Cupiał
 
-Contributors: Andrei Antoukh, Ben Lopatin
+Contributors: Andrei Antoukh, Ben Lopatin, Marcin Kozioł, Berry Philips, Sebastian Vetter
 
-# Description
+## Description
 
 Formfields in django are not suited for HTML5, hence this app
 
-# Installation
+## Installation
 
  1. clone repository git clone git://github.com/adamcupial/django-html5-forms.git, put it somewhere in your python path
  2. add 'html5forms' to INSTALLED_APPS (not required)
  3. use appropriate form fields in your forms (since the widgets requires some additional attributes passed from forms, you should use fields)
 
-# Fields
+## Fields
 
-## All fields
+### All fields
 
-### Attributes
+#### Attributes
  * all the core attributes from django field
  * placeholder :text, which displays on the field when it is empty and unfocused
  * autofocus (true/false), automaticaly set focus to element on page load
 
-## Html5CharField
+### Html5CharField
 
 widget: Html5TextInput
 
@@ -30,7 +30,7 @@ widget: Html5TextInput
  * all the attr of django CharField
  * datalist: list or tuple, of words for autocompletion (sng like autocomplete in firefox or chrome)
 
-## Html5PasswordField
+### Html5PasswordField
 
 widget: Html5PasswordInput
 
@@ -38,7 +38,7 @@ widget: Html5PasswordInput
 
  * all the attr of django CharField/PasswordField
 
-## Html5SearchField
+### Html5SearchField
 
 widget: Html5SearchInput
 
@@ -46,13 +46,13 @@ widget: Html5SearchInput
 
  * all the attr of django CharField/PasswordField
 
-## Html5EmailField
+### Html5EmailField
 
  widget: Html5EmailInput
 
-## Html5UrlField
+### Html5UrlField
 
-## Html5IntegerField
+### Html5IntegerField
 
 widget: Html5NumberInput
 
@@ -61,11 +61,11 @@ widget: Html5NumberInput
    * min_value
    * max_value
 
-## Html5BooleanField
+### Html5BooleanField
 
 widget: Html5CheckboxInput
 
-## Html5RangeField
+### Html5RangeField
 
 widget: Html5RangeInput
 
@@ -73,7 +73,14 @@ widget: Html5RangeInput
    * same as Html5IntegerField
    * step
 
-## Html5TelField
+### Html5ChoiceField
+
+widget: Html5Select
+
+  Attributes:
+   * same as forms.ChoiceField
+
+### Html5TelField
 
 widget: Html5TelInput
 
