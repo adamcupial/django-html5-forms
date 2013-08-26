@@ -57,7 +57,7 @@ class Html5CheckboxInput(forms.widgets.CheckboxInput):
         final_attrs = self.build_attrs(attrs, type='checkbox', name=name)
         try:
             result = self.check_test(value)
-        except:  # Silently catch exceptions
+        except: # Silently catch exceptions
             result = False
         if result:
             final_attrs['checked'] = 'checked'
@@ -106,3 +106,6 @@ class Html5Select(forms.Select):
         selected_html = mark_safe(selected_html)
         return format_html(u'<option value="{0}"{1}>{2}</option>',
                 option_value, selected_html, force_unicode(option_label))
+
+class Html5TelInput(Html5TextInput):
+    input_type = 'tel'

@@ -2,7 +2,7 @@ from django import forms
 from django.utils import formats
 from django.core.exceptions import ValidationError
 from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
-from widgets import Html5SearchInput, Html5EmailInput, Html5Select
+from widgets import Html5SearchInput, Html5EmailInput, Html5Select, Html5TelInput
 from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
 from django.core import validators, exceptions
 from django.utils.encoding import smart_unicode
@@ -14,6 +14,7 @@ __all__ = (
         'Html5Field', 'Html5CharField', 'Html5PasswordField',
         'Html5SearchField', 'Html5EmailField', 'Html5URLField',
         'Html5IntegerField', 'Html5BooleanField', 'Html5RangeField',
+        'Html5TelField',
         )
 
 
@@ -196,7 +197,7 @@ class Html5URLField(Html5CharField):
     :type max_length: Integer
     :param verify_exists: check whether specified url address exists (is not 404), default False
     :type verify_exists: Boolean
-    :param validator_user_agent: String used as the user-agent used when checking for a URL's existence. Defaults to the value of the URL_VALIDATOR_USER_AGENT setting.
+    :param validator_user_agent: String used as the user-agent used when checking for a URL's existence.
     :type validator_user_agent: String
     """
 
@@ -220,6 +221,36 @@ class Html5URLField(Html5CharField):
                 url_fields[2] = '/'
                 value = urlparse.urlunsplit(url_fields)
         return super(Html5URLField, self).to_python(value)
+
+
+class Html5TelField(Html5CharField):
+    """ Telephone Field
+
+    :param placeholder: placeholder text to display if field in unfocused
+    :type placeholder: String
+    :param autofocus: should the field be focused on load
+    :type autofocus: Boolean
+    :param datalist: choices for inbuild HTML5 autocompleter
+    :type datalist: list of two-tuples
+    :param min_length: minimum length for field
+    :type min_length: Integer
+    :param max_length: maximum length for field
+    :type max_length: Integer
+    """
+
+    widget = Html5TelInput
+
+    default_error_messages = {
+        'invalid': _(u'Enter a valid telephone number.'),
+    }
+
+    def __init__(self, max_length=30, min_length=1,
+            datalist=None, *args, **kwargs):
+        """Provides a default min and max length for developers who just want
+        to use a phone number.
+        """
+        super(Html5TelField, self).__init__(
+            max_length, min_length, datalist, *args, **kwargs)
 
 
 class Html5IntegerField(Html5Field):
