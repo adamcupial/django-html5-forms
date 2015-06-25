@@ -1,13 +1,14 @@
 from django import forms
 from django.utils import formats
 from django.core.exceptions import ValidationError
-from widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
-from widgets import Html5SearchInput, Html5EmailInput, Html5Select, Html5TelInput
-from widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
+from .widgets import Html5TextInput, Html5PasswordInput, Html5CheckboxInput
+from .widgets import Html5SearchInput, Html5EmailInput, Html5Select, Html5TelInput
+from .widgets import Html5URLInput, Html5NumberInput, Html5RangeInput
 from django.core import validators, exceptions
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 from django.utils.translation import ugettext_lazy as _
-import urlparse
+import six
+import six.moves.urllib.parse as urlparse
 
 
 __all__ = (
@@ -51,7 +52,7 @@ class Html5Field(forms.fields.Field):
             widget_attrs['required'] = None
             current_class.append('required')
 
-        if isinstance(self.class_attr, (str, unicode)):
+        if isinstance(self.class_attr, six.string_types):
             self.class_attr = self.class_attr.split()
 
         for classitem in self.class_attr:
@@ -129,7 +130,7 @@ class Html5CharField(Html5Field):
     def to_python(self, value):
         if value in validators.EMPTY_VALUES:
             return u''
-        return smart_unicode(value)
+        return smart_text(value)
 
     def widget_attrs(self, widget):
         par_attrs = super(Html5CharField, self).widget_attrs(widget)
@@ -375,7 +376,7 @@ class Html5ChoiceField(Html5Field):
         "Returns a Unicode object."
         if value in validators.EMPTY_VALUES:
             return u''
-        return smart_unicode(value)
+        return smart_text(value)
 
     def validate(self, value):
         """
@@ -392,9 +393,9 @@ class Html5ChoiceField(Html5Field):
                 # This is an optgroup, so look inside the group for options
                 for x in v:
                     k2 = x[0]
-                    if value == smart_unicode(k2):
+                    if value == smart_text(k2):
                         return True
             else:
-                if value == smart_unicode(k):
+                if value == smart_text(k):
                     return True
         return False

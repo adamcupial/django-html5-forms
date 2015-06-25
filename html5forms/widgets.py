@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.safestring import mark_safe
-from django.utils.encoding import force_unicode, force_text
+from django.utils.encoding import force_text
 from django.utils.html import format_html
-from util import flatatt, render_datalist
+from .util import flatatt, render_datalist
 from django.utils.html import conditional_escape
 
 
@@ -19,7 +19,7 @@ class Html5Textarea(forms.widgets.Textarea):
         final_attrs = self.build_attrs(attrs, name=name)
 
         return mark_safe(u'<textarea%s>%s</textarea>' % (flatatt(final_attrs),
-                conditional_escape(force_unicode(value))))
+                conditional_escape(force_text(value))))
 
 
 class Html5TextInput(forms.widgets.TextInput):
@@ -31,10 +31,10 @@ class Html5TextInput(forms.widgets.TextInput):
 
         if value != '':
             # Only add the 'value' attribute if a value is non-empty.
-            final_attrs['value'] = force_unicode(self._format_value(value))
+            final_attrs['value'] = force_text(self._format_value(value))
         if getattr(self, 'datalist', None) and isinstance(self.datalist, (tuple, list)):
             datalist_name = u'%s_datalist' % name
-            final_attrs['list'] = force_unicode(u'%s_datalist' % name)
+            final_attrs['list'] = force_text(u'%s_datalist' % name)
             return mark_safe(u"""<input%s >%s"""
                     % (flatatt(final_attrs),
                         render_datalist(datalist_name, self.datalist)))
@@ -63,7 +63,7 @@ class Html5CheckboxInput(forms.widgets.CheckboxInput):
             final_attrs['checked'] = 'checked'
         if value not in ('', True, False, None):
             # Only add the 'value' attribute if a value is non-empty.
-            final_attrs['value'] = force_unicode(value)
+            final_attrs['value'] = force_text(value)
         return mark_safe(u'<input%s />' % flatatt(final_attrs))
 
 
@@ -105,7 +105,7 @@ class Html5Select(forms.Select):
                 selected_choices.remove(option_value)
         selected_html = mark_safe(selected_html)
         return format_html(u'<option value="{0}"{1}>{2}</option>',
-                option_value, selected_html, force_unicode(option_label))
+                option_value, selected_html, force_text(option_label))
 
 class Html5TelInput(Html5TextInput):
     input_type = 'tel'
