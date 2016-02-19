@@ -40,17 +40,17 @@ class Html5Field(forms.fields.Field):
         super(Html5Field, self).__init__(*args, **kwargs)
 
     def widget_attrs(self, widget):
-        widget_attrs = super(Html5Field, self).widget_attrs(widget)
-        current_class = widget_attrs.get('class', '').split()
+        _widget_attrs = super(Html5Field, self).widget_attrs(widget)
+        current_class = _widget_attrs.get('class', '').split()
 
         if self.placeholder:
-            widget_attrs['placeholder'] = self.placeholder
+            _widget_attrs['placeholder'] = self.placeholder
 
         if self.autofocus:
-            widget_attrs['autofocus'] = None
+            _widget_attrs['autofocus'] = None
 
         if self.required:
-            widget_attrs['required'] = None
+            _widget_attrs['required'] = None
             current_class.append('required')
 
         if isinstance(self.class_attr, six.string_types):
@@ -61,9 +61,9 @@ class Html5Field(forms.fields.Field):
                 current_class.append(classitem)
 
         if current_class:
-            widget_attrs['class'] = ' '.join(current_class)
+            _widget_attrs['class'] = ' '.join(current_class)
 
-        return widget_attrs
+        return _widget_attrs
 
 
 class Html5BooleanField(Html5Field):
@@ -85,15 +85,15 @@ class Html5BooleanField(Html5Field):
         return value
 
     def widget_attrs(self, widget):
-        widget_attrs = {}
+        _widget_attrs = {}
 
         if self.autofocus:
-            widget_attrs['autofocus'] = None
+            _widget_attrs['autofocus'] = None
 
         if self.required:
-            widget_attrs['required'] = None
+            _widget_attrs['required'] = None
 
-        return widget_attrs
+        return _widget_attrs
 
 
 class Html5CharField(Html5Field):
