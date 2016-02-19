@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from xml.etree import ElementTree
 from django.test import TestCase
 from html5forms import Form
 from html5forms.fields import *
+
 
 class TestBooleanField(TestCase):
     def setUp(self):
@@ -28,8 +30,16 @@ class TestBooleanField(TestCase):
 
     def test_form(self):
         form = self.form_class({'field':'t'})
-        self.assertEqual(form['field'],
-            '<input checked="checked" type="checkbox" name="field" value="t" id="id_field" />')
+        expected = '<input checked="checked" type="checkbox" name="field" value="t" id="id_field" />'
+        to_compare = [expected, str(form['field'])]
+        self.assertEqual(*(self._standardize_xml(xmlstr) for xmlstr in to_compare))
+
+    @staticmethod
+    def _standardize_xml(string):
+        """ Returns a standard string representation of an ElementTree xml node given an xml string. """
+        return ElementTree.tostring(
+            ElementTree.fromstring(string)
+        )
 
 
 class TestCharField(TestCase):
