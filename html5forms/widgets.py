@@ -67,6 +67,12 @@ class Html5CheckboxInput(forms.widgets.CheckboxInput):
             final_attrs['value'] = force_text(value)
         return mark_safe(u'<input%s />' % flatatt(final_attrs))
 
+    def value_from_datadict(self, data, files, name):
+        value = data.get(name, None)
+        if value in ('False', '0'):
+            value = False
+        return value
+
 
 class Html5SearchInput(Html5TextInput):
     input_type = 'search'
