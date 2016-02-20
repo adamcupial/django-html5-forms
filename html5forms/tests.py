@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from xml.etree import ElementTree
+
 from django.test import TestCase
+
 from html5forms import Form
 from html5forms.fields import *
 
@@ -60,10 +62,9 @@ class TestCharField(TestCase):
 
     def test_html_output(self):
         form = self.form_class({'field':'**'})
-        self.assertIn('maxlength="20"', form['field'])
-        self.assertIn('autofocus', form['field'])
-        self.assertIn(' required ', form['field'])
-        self.assertIn('class="required test-class"', form['field'])
+        value = str(form['field'])
+        for exp in ['maxlength="20"', 'autofocus', ' required ', 'class="required test-class"']:
+            self.assertIn(exp, value)
 
 
 class TestIntegerField(TestCase):
